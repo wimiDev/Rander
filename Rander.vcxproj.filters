@@ -27,6 +27,9 @@
     <ClCompile Include="RanderData.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SetSec.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form1.h">
@@ -39,6 +42,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="RanderData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSec.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

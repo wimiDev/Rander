@@ -59,10 +59,13 @@ namespace Rander {
 		/// <summary>
 		/// 必需的设计器变量。
 		/// </summary>
+		SetSec^SetForm; 
 	public:
 		Graphics ^grap; 
 		RanderData^Randing;
 		int star;
+	
+	public:
 		int  end;
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -96,14 +99,15 @@ namespace Rander {
 			this->Numberannd->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->Numberannd->Name = L"Numberannd";
-			this->Numberannd->Size = System::Drawing::Size(122, 21);
-			this->Numberannd->Text = L"生成随机数字";
+			this->Numberannd->Size = System::Drawing::Size(156, 21);
+			this->Numberannd->Text = L"设置随机数字区间";
 			// 
 			// 设置生成区间ToolStripMenuItem
 			// 
 			this->设置生成区间ToolStripMenuItem->Name = L"设置生成区间ToolStripMenuItem";
 			this->设置生成区间ToolStripMenuItem->Size = System::Drawing::Size(178, 22);
 			this->设置生成区间ToolStripMenuItem->Text = L"设置生成区间";
+			this->设置生成区间ToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::设置生成区间ToolStripMenuItem_Click);
 			// 
 			// Begin
 			// 
@@ -125,14 +129,14 @@ namespace Rander {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-			this->BackColor = System::Drawing::Color::BlueViolet;
+			this->BackColor = System::Drawing::Color::Thistle;
 			this->ClientSize = System::Drawing::Size(384, 362);
 			this->Controls->Add(this->Begin);
 			this->Controls->Add(this->menuStrip1);
 			this->ForeColor = System::Drawing::Color::Fuchsia;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
-			this->Text = L"Rander V1.0.0";
+			this->Text = L"随机数生成器";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -143,12 +147,12 @@ namespace Rander {
 #pragma endregion
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 	 this->Invalidate();
-				
+	 this->Begin->Enabled = false;			
 	}
 	
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 star=0;
-			 end=50;
+			 star = SetForm->GetStartNum();
+			 end=SetForm->GetEndNum();
 			 grap= this->CreateGraphics();
 
 			 GraphicsPath^UIPath = gcnew GraphicsPath();
@@ -163,15 +167,21 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 UIPath->AddRectangle(rec);
 			 RandPath->AddEllipse(Rrec);
 			 RandPath->AddEllipse(Rrec.X+40,Rrec.Y+40,Rrec.Width-80,Rrec.Height-80);
-			 LinearGradientBrush^UIbrush = gcnew  LinearGradientBrush(rec, Color::DeepPink, Color::CadetBlue, 45);
+			 LinearGradientBrush^UIbrush = gcnew  LinearGradientBrush(rec, Color::Thistle, Color::BlueViolet, 45);
 			 LinearGradientBrush^Rbrush = gcnew  LinearGradientBrush(Rrec, Color::DarkCyan, Color::White, 45);
 			 SolidBrush^Fbrush = gcnew SolidBrush(Color::White);
 			 grap->FillPath(UIbrush, UIPath);
 			 grap->FillPath(Rbrush, RandPath);
 			 grap->DrawString(Randing->Randing(star, end).ToString(), font, Fbrush, Frec);
-			
-			
+		
 }
+
+	private: System::Void 设置生成区间ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+				SetForm = gcnew SetSec();
+				this->Begin->Enabled = true;
+	}
+
+
 };
 }
 
